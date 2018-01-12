@@ -125,16 +125,20 @@ class MageCartService extends MageService
             ->setCollectShippingRates(true)
             ->collectShippingRates();
 
-        $rate = $shippingAddress->getShippingRatesCollection()->getFirstItem();
-        $shippingAddress->setShippingMethod($rate->getCode());
-        $quote->collectTotals();
-        return array(
-            'carrierTitle' => $rate->getCarrierTitle(),
-            'methodTitle' => $rate->getMethodTitle(),
-            'methodDescription' => $rate->getMethodDescription(),
-            'price' => floor(floatval($rate->getPrice()))
-        );
-
+        $rates = $shippingAddress->getShippingRatesCollection();
+        $parsedrates = array();
+        //$shippingAddress->setShippingMethod($rates->getCode());
+        //$quote->collectTotals();
+        foreach($rates as $rate)
+        {
+            $parsedrates[] = [
+                'carrierTitle' => $rate->getCarrierTitle(),
+                'methodTitle' => $rate->getMethodTitle(),
+                'methodDescription' => $rate->getMethodDescription(),
+                'price' => floor(floatval($rate->getPrice()))
+            ];
+        }
+        return $parsedrates;
     }
 
     protected function parseQuoteItem( $itemarray, &$bucket )
