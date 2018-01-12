@@ -131,6 +131,7 @@ class MageCartService extends MageService
         //$quote->collectTotals();
         foreach($rates as $rate)
         {
+            var_dump($rate);
             $parsedrates[] = [
                 'carrierTitle' => $rate->getCarrierTitle(),
                 'methodTitle' => $rate->getMethodTitle(),
@@ -138,7 +139,7 @@ class MageCartService extends MageService
                 'price' => floor(floatval($rate->getPrice()))
             ];
         }
-        var_dump($parsedrates);
+
         return $parsedrates;
     }
 
