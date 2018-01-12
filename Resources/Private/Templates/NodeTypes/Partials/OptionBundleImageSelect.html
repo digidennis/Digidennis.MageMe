@@ -1,0 +1,24 @@
+{namespace ts=Neos\Fusion\ViewHelpers}
+{namespace sitepack=Digidennis\SitePack\ViewHelpers}
+{namespace mageme=Digidennis\MageMe\ViewHelpers}
+
+<div class="digidennis-mageme-optionbundleimage-select " data-component="OptionBundleImageSelect">
+    <ul>
+    <f:for each="{selection.items}" as="item" key="index">
+        <li>
+            <f:format.raw>
+                <mageme:imageSelectInput selection="{selection}" item="{item}" index="{index}" optionid="{optionid}" getargument="{getargument}"/>
+            </f:format.raw>
+            <label for="{item.selectionId}">
+                <f:if condition="{images}">
+                    <f:format.raw>
+                        <sitepack:renderAtIndex array="{images}" index="{index}" address="obj">
+                            <ts:render path="imagerenderer" context="{node: obj, title: item.name}"/>
+                        </sitepack:renderAtIndex>
+                    </f:format.raw>
+                </f:if>
+            </label>
+        </li>
+    </f:for>
+    </ul>
+</div>

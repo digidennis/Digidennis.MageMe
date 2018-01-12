@@ -1,0 +1,13 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+
+<div class="hidden"
+     data-component="Rule"
+     data-rule-type="option"
+     data-rule-target-identifier="{dependingoption}"
+     data-rule-truewhen="{truewhen}"
+     data-rule-notice="{noticemsg}">
+</div>
+
+<f:if condition="{neos:rendering.inBackend()}">
+    <p>Option Rule, disabled if {truewhen}</p>
+</f:if>

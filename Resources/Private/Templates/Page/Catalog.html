@@ -1,0 +1,12 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+
+<f:section name="body">
+    {parts.menu -> f:format.raw()}
+    <section class="content">
+        {parts.breadcrumbs -> f:format.raw()}
+        {parts.pagemenu -> f:format.raw()}
+        {content.main -> f:format.raw()}
+        {parts.products -> f:format.raw()}
+    </section>
+    {parts.footer -> f:format.raw()}
+</f:section>

@@ -1,0 +1,14 @@
+{
+    "description": "",
+    "type": "neos-package",
+    "name": "digidennis/mageme",
+    "require": {
+        "neos/flow": "*",
+        "digidennis/sitepack": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Digidennis\\MageMe\\": "Classes"
+        }
+    }
+}

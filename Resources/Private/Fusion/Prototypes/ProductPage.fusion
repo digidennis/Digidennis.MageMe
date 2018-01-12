@@ -1,0 +1,134 @@
+prototype(Digidennis.MageMe:ProductPage.Document) < prototype(Neos.NodeTypes:Page.Document) {
+
+    bodyTag.attributes.class = 'digidennis-mageme-productpage'
+    body {
+        @class = 'Digidennis\\MageMe\\Fusion\\MageProductImplementation'
+        @context.currencySymbol = ${this.currencySymbol}
+        @context.productid = ${q(node).property('productid')}
+
+        deliverystring = ${this.deliveryString}
+        productreturnpolicy = ${this.productReturnPolicy}
+        baseprice = ${this.basePrice}
+        producttype = ${this.productType}
+        productslot = ${MageMe.ProductHelper.getSlotForProduct(q(node).property('productid'))}
+        teasercontent = ${q(node).property('teasercontent')}
+        productid = ${q(node).property('productid')}
+        currencySymbol = ${currencySymbol}
+        templatePath = 'resource://Digidennis.MageMe/Private/Templates/Page/ProductPage.html'
+        sectionName = 'body'
+        title = ${q(node).property('title')}
+
+        content {
+            main = PrimaryContent {
+                nodePath = 'main'
+                @if.gotcontent = ${node.context.inBackend || q(documentNode).children('main').children().count()> 0}
+            }
+            slick = Digidennis.SitePack:SlickCollection{
+                nodePath = 'slick'
+                @context.node = ${q(node).children('slick').get(0)}
+            }
+            dimensionsblock = Neos.Fusion:Template{
+                templatePath = 'resource://Digidennis.MageMe/Private/Templates/FusionObjects/DimensionBlock.html'
+                dimensioncontentidentifier = ${q(node).children('dimensioncontent').get(0).identifier}
+                hascontent = ${node.context.inBackend||q(node).children('dimensioncontent').children().count()>0}
+                productslot = ${MageMe.ProductHelper.getSlotForProduct(q(node).property('productid'))}
+                dimensionargs = ${request.arguments.dimensions}
+                dimensioncontent = ContentCollection{
+                    @context.node = ${q(documentNode).children('dimensioncontent').get(0)}
+                    nodePath = 'dimensioncontent'
+                    attributes{
+                        class = ${'option-content'}
+                        id = ${'content-' + node.identifier}
+                    }
+                    @if.gotcontent = ${node.context.inBackend || q(node).children().count()> 0}
+                }
+                @cache.entryIdentifier.dimensions = ${"dimensions=" + Json.stringify(request.arguments.dimensions)}
+            }
+            options = ContentCollection{
+                nodePath = 'options'
+                @if.notEmptyOrBackend = ${node.context.inBackend || q(node).children().count() > 0}
+                @cache.entryIdentifier.dimensions = ${"dimensions=" + Json.stringify(request.arguments.dimensions)}
+                @cache.entryIdentifier.options = ${"options=" + Json.stringify(request.arguments.options)}
+            }
+        }
+        javascripts.minify{
+            stepper = Digidennis.Minify:Resource{
+                group = 'jsbody'
+                path = Neos.Fusion:ResourceUri {
+                    path = 'resource://Digidennis.MageMe/Public/Vendor/Stepper/jquery.fs.stepper.min.js'
+                }
+            }
+            sumoselect = Digidennis.Minify:Resource{
+                group = 'jsbody'
+                path = Neos.Fusion:ResourceUri {
+                    path = 'resource://Digidennis.MageMe/Public/Vendor/Sumoselect/jquery.sumoselect.min.js'
+                }
+            }
+            product-imageselect = Digidennis.Minify:Resource{
+                group = 'jsbody'
+                path = Neos.Fusion:ResourceUri {
+                    path = 'resource://Digidennis.MageMe/Public/Javascript/OptionImageSelect.jquery.js'
+                }
+            }
+            product-jquery = Digidennis.Minify:Resource{
+                group = 'jsbody'
+                path = Neos.Fusion:ResourceUri {
+                    path = 'resource://Digidennis.MageMe/Public/Javascript/Product.jquery.js'
+                }
+            }
+            product-bootstrap = Digidennis.Minify:Resource{
+                group = 'jsbody'
+                path = Neos.Fusion:ResourceUri {
+                    path = 'resource://Digidennis.MageMe/Public/Javascript/Bootstrap.js'
+                }
+            }
+        }
+    }
+    head.stylesheets.minify{
+        stepper = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Vendor/Stepper/jquery.fs.stepper.css'
+            }
+        }
+        sumoselect = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Vendor/Sumoselect/sumoselect.css'
+            }
+        }
+        productpage-mageme-frontend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMe.css'
+            }
+            @position = "start"
+        }
+        productpage-mageme-backend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMeBackend.css'
+
+            }
+            @if.isBackend = ${node.context.inBackend}
+        }
+    }
+    @cache {
+        mode = 'cached'
+
+        maximumLifetime = '86400'
+
+        entryIdentifier {
+            node = ${node}
+            dimensions = ${ "dimensions=" + Json.stringify(request.arguments.dimensions)}
+            options = ${ "options=" + Json.stringify(request.arguments.options)}
+        }
+
+        entryTags {
+            # Whenever the node changes the matched condition could change
+            1 = ${'Node_' + documentNode.identifier}
+            # Whenever one of the parent nodes changes the layout could change
+            2 = ${'DescendantOf_' + documentNode.identifier}
+        }
+    }
+}

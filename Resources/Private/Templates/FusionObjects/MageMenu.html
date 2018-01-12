@@ -1,0 +1,20 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+<f:section name="cartLink">
+    <li class="topcat">
+        <a href="<neos:uri.node node="{cartnode}"/>">
+            <i class="glyphicon glyphicon-shopping-cart"></i>Indkøbskurv
+            <f:if condition="{quotecount} > 0">
+                <f:then><span class="magemenu-cart-qty">{quotecount}</span></f:then>
+                <f:else><span class="magemenu-cart-qty empty"></span></f:else>
+            </f:if>
+        </a>
+    </li>
+</f:section>
+
+<f:section name="accountLink">
+    <li class="topcat">
+        <a href="http://shop.kbh-skum.dk/customer/account" href>
+            <i class="glyphicon glyphicon-user"></i>Konto
+        </a>
+    </li>
+</f:section>

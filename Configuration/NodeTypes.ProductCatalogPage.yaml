@@ -1,0 +1,18 @@
+Digidennis.MageMe:ProductCatalogPage:
+  superTypes:
+    Neos.NodeTypes:Page: true
+  ui:
+    label: 'Product Catalog'
+    icon: icon-renren
+    group: mageme
+    inlineEditable: true
+    inspector:
+      groups:
+        main:
+          label: 'Produkt Katalog'
+          position: 5
+  constraints:
+    nodeTypes:
+      '*': false
+      Digidennis.MageMe:ProductCatalogPage: true
+      Digidennis.MageMe:ProductPage: true

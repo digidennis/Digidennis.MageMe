@@ -1,0 +1,83 @@
+Digidennis.MageMe:Productlist:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Produktliste'
+    icon: icon-bars
+    group: mageme
+    inlineEditable: false
+    inspector:
+      groups:
+        main:
+          label: 'Produktliste'
+          position: 5
+  properties:
+    showcount:
+      type: integer
+      ui:
+        label: 'Vis antal'
+        reloadIfChanged: true
+        inspector:
+          group: main
+      validation:
+        'Neos.Neos/Validation/NumberRangeValidator':
+          minimum: 1
+          maximum: 50
+    productrowcount:
+      type: integer
+      ui:
+        label: 'Produkt kolonne længde'
+        reloadIfChanged: true
+        inspector:
+          group: main
+      validation:
+        'Neos.Neos/Validation/NumberRangeValidator':
+          minimum: 1
+          maximum: 12
+    showproductimage:
+      type: boolean
+      defaultValue: TRUE
+      ui:
+        label: 'Vis Produkt billed'
+        reloadIfChanged: true
+        inspector:
+          group: main
+    showproductteaser:
+      type: boolean
+      defaultValue: TRUE
+      ui:
+        label: 'Vis Produkt Tekst'
+        reloadIfChanged: true
+        inspector:
+          group: main
+    catalog:
+      type: reference
+      ui:
+        label: 'Fra katalog'
+        reloadIfChanged: true
+        inspector:
+          group: main
+          editorOptions:
+            nodeTypes: ['Digidennis.MageMe:ProductCatalogPage']
+    products:
+      type: references
+      ui:
+        label: 'Produkter'
+        reloadIfChanged: true
+        inspector:
+          group: main
+          editorOptions:
+            nodeTypes: ['Digidennis.MageMe:ProductPage']
+    cssclass:
+      type: string
+      defaultValue: ''
+      ui:
+        label: 'CSS class'
+        reloadIfChanged: TRUE
+        inspector:
+          group: main
+    title:
+      type: string
+      ui:
+        label: 'Liste titel'
+        inlineEditable: true

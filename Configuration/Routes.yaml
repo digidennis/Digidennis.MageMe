@@ -1,0 +1,8 @@
+
+-
+  name: 'Action Cart Controller Route'
+  uriPattern:    'mageme/cart/{@action}(.{@format})'
+  defaults:
+    '@package':    'Digidennis.MageMe'
+    '@controller': 'Cart'
+    '@format': 'html'

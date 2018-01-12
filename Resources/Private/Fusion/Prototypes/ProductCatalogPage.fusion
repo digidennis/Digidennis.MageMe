@@ -1,0 +1,52 @@
+prototype(Digidennis.MageMe:ProductCatalogPage.Document) < prototype(Neos.NodeTypes:Page.Document) {
+
+    bodyTag.attributes.class = 'digidennis-mageme-productcatalogpage'
+
+    @context.showproductimage = true
+    @context.showproductteaser = true
+
+    head.stylesheets.minify{
+        catalogpage-mageme-frontend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMe.css'
+            }
+        }
+        catalogpage-mageme-backend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMeBackend.css'
+
+            }
+            @if.isBackend = ${node.context.inBackend}
+        }
+    }
+    body {
+        templatePath = 'resource://Digidennis.MageMe/Private/Templates/Page/Catalog.html'
+        sectionName = 'body'
+        parts {
+            products = Digidennis.MageMe:Productlist {
+                attributes.class = "row digidennis-mageme-productlist"
+                products.collection = ${q(node).find('[instanceof Digidennis.MageMe:ProductPage]')}
+                prototype(Digidennis.MageMe:ProductInlineRenderer){
+                    @context.showproductimage = true
+                    @context.showproductteaser = true
+                    @process.colwrap = ${'<div class="col-sm-6 col-md-4 col-lg-3">' + value + '</div>'}
+                }
+            }
+            pagemenu  {
+                entryLevel = Neos.Fusion:Case{
+                    atroot {
+                        condition = ${node.depth <= 3}
+                        renderer = '2'
+                    }
+                    belowroot{
+                        condition = ${node.depth > 3}
+                        renderer = ${node.depth-1}
+                    }
+                }
+                @if.hascatalogchildren = ${q(node).children('[instanceof Digidennis.MageMe:ProductCatalogPage]').count() > 0}
+            }
+        }
+    }
+}

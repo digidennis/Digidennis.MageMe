@@ -1,0 +1,57 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+
+<div class="digidennis-mageme-cartcontent">
+    <div class="row">
+        <div class="col-sm-4 shipping-estimate">
+
+            <h5>Levering</h5>
+            <div class="shipping-estimate-inner">
+                {quote.shipping.methodDescription -> f:format.raw()}
+                <strong>Pris: DKK {quote.shipping.price}.-</strong>
+            </div>
+
+        </div>
+        <div class="col-sm-8 total-overview clearfix">
+            <p><b>{quote.itemCount}</b> vare(r) i indkøbskurv</p>
+            <p class="shipping">{quote.shipping.carrierTitle}<span>{quote.shipping.price}.-</span></p>
+            <p class="amount">Ordretotal<span>DKK {quote.grandTotal}.-</span></p>
+            <a href="{cartlink}" title="Fortsæt til kasse" class="btn btn-primary pull-right">Fortsæt til kasse</a>
+        </div>
+    </div>
+    <f:form action="update" controller="Cart" package="Digidennis.MageMe" name="add-cart" class="add-cart" id="add-cart-form">
+        <f:render section="quoteItems" arguments="{quote: quote}" />
+    </f:form>
+</div>
+
+<f:section name="quoteItems">
+    <div class="qoute-item-list">
+        <f:for each="{quote.items}" as="item">
+            <div class="quote-item">
+                <div class="row">
+                    <div class="item-qty col-xs-2 col-sm-3">
+                        <input type="text" name="cart[{item.itemId}][qty]" pattern="\d*" value="{item.qty}" size="2" class="form-control" autocomplete="off"/>
+                        <span>x</span>
+                        <input type="submit" class="btn btn-primary hidden" name="action[updateQty]" value="Opdater" />
+                    </div><!--
+            --><div class="item col-xs-10 col-sm-9">
+                    <div class="col-sm-9">
+                        <h4 class="title">{item.name}</h4>
+                        <div class="sub-total-tax price">{item.subTotalTax}.-</div>
+                        <f:if condition="{item.options}">
+                            <div class="quote-item-options">
+                                <f:for each="{item.options}" as="type" iteration="typeitt">
+                                    <label>{type.label -> f:format.raw()}:</label> {type.value -> f:format.raw()}{f:if(condition: typeitt.isLast, else: '</br>')}
+                                </f:for>
+                            </div>
+                        </f:if>
+                    </div>
+                    <div class="col-sm-3 row-total">Total i DKK <span class="price">{item.rowTotalTax}.-</span></div>
+                </div>
+                    <div class="item-actions">
+                        <button class="item-delete" name="action[itemDelete][itemId][{item.itemId}]" value="Fjern vare" aria-label="Fjern vare"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                    </div>
+                </div>
+            </div>
+        </f:for>
+    </div>
+</f:section>

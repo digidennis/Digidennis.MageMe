@@ -1,0 +1,30 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+<div class="digidennis-mageme-product-inline">
+    <f:if condition="{showproductimage}">
+        <f:if condition="{image}">
+            <f:then><neos:link.node node="{node}">{image -> f:format.raw()}</neos:link.node></f:then>
+            <f:else><neos:link.node node="{node}"><img src="{dummyimage}" /></neos:link.node></f:else>
+        </f:if>
+    </f:if>
+    <h3><neos:link.node node="{node}">{product.title -> f:format.raw()}</neos:link.node></h3>
+    <f:if condition="{staticprice}">
+        <f:then>
+            <div class="price">{staticprice} <span>/stk</span></div>
+        </f:then>
+        <f:else>
+            <div class="price"><neos:link.node node="{node}">se pris</neos:link.node></div>
+        </f:else>
+    </f:if>
+    <f:if condition="{showproductteaser}">
+        <neos:contentElement.wrap node="{node}">
+            <neos:contentElement.editable property="teasercontent" tag="div" class="teaser"/>
+        </neos:contentElement.wrap>
+    </f:if>
+    <ul>
+        <!--li>{catalog}</li-->
+        <li>{deliverystring}</li>
+        <li>{productreturnpolicy}</li>
+    </ul>
+
+    <neos:link.node node="{node}" class="btn btn-default">Læs mere</neos:link.node>
+</div>

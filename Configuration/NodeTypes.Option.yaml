@@ -1,0 +1,47 @@
+Digidennis.MageMe:Option:
+  label: ${'Option ' +q(node).property('title')}
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Option'
+    icon: icon-yc
+    group: mageme
+    inlineEditable: true
+    inspector:
+      groups:
+        magento:
+          label: Magento
+          position: 5
+  childNodes:
+    rules:
+      type: Neos.Neos:ContentCollection
+      constraints:
+          nodeTypes:
+            Digidennis.MageMe:RuleOption: true
+            Digidennis.MageMe:RuleDimension: true
+            '*': false
+    content:
+      type: Neos.Neos:ContentCollection
+  properties:
+    optionid:
+      type: string
+      ui:
+        label: Option Id
+        reloadIfChanged: true
+        inspector:
+          group: magento
+          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            dataSourceIdentifier: 'digidennis-mageme-productoptions'
+    open:
+      type: boolean
+      defaultValue: false
+      ui:
+        label: Config Open
+        inspector:
+          group: magento
+
+Neos.Neos:ContentCollection:
+  constraints:
+    nodeTypes:
+      Digidennis.MageMe:Option: false

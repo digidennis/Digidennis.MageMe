@@ -1,0 +1,8 @@
+prototype(Digidennis.MageMe:OptionImageSelect) < prototype(Digidennis.MageMe:Option) {
+    optionid = ${q(node).property('optionid')}
+    imagerenderer = Neos.NodeTypes:Image{
+        attributes.data-node-identifier = ${node.identifier}
+        maximumWidth = 200
+        title = ${title}
+    }
+}

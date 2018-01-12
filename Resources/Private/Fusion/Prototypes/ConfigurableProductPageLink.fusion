@@ -1,0 +1,10 @@
+prototype(Digidennis.MageMe:ConfigurableProductPageLink) < prototype(Neos.Neos:Plugin) {
+
+    package = 'Digidennis.MageMe'
+    controller = 'ConfigurableProductPageLink'
+    action = 'index'
+
+    productid = ${q(node).property('productid')}
+
+
+}

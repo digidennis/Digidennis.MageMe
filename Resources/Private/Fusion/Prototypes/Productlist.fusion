@@ -1,0 +1,49 @@
+prototype(Digidennis.MageMe:Productlist) < prototype(Content) {
+
+    @context.productrowcount = ${q(node).property('productrowcount')}
+    @context.contentrowcount = ${q(node).property('contentrowcount')}
+    @context.showproductimage = ${q(node).property('showproductimage')}
+    @context.showproductteaser = ${q(node).property('showproductteaser')}
+
+    templatePath = 'resource://Digidennis.MageMe/Private/Templates/NodeTypes/Productlist.html'
+    node = ${node}
+    attributes.class = ${'row ' + q(node).property('cssclass')}
+
+    products = Neos.Fusion:Collection {
+        collection = Neos.Fusion:Case {
+            products{
+                condition = ${q(node).property('products')}
+                renderer = ${q(q(node).property('products')).slice(0,q(node).property('showcount'))}
+            }
+            catalog{
+                condition = ${q(node).property('catalog')}
+                renderer = ${q(q(node).property('catalog')).children('[instanceof Digidennis.MageMe:ProductPage]').slice(0,q(node).property('showcount'))}
+            }
+        }
+        itemName = 'node'
+        itemRenderer = Digidennis.MageMe:ProductInlineRenderer
+    }
+}
+
+
+prototype(Neos.Neos:Page) {
+    @context.instancePresent = ${q(node).find('[instanceof Digidennis.MageMe:Productlist]').count() > 0}
+    head.stylesheets.minify{
+        productlist-mageme-frontend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMe.css'
+            }
+            @if.instancepresent = ${instancePresent}
+        }
+        productlist-mageme-backend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMeBackend.css'
+
+            }
+            @if.instancepresent = ${instancePresent}
+            @if.isBackend = ${node.context.inBackend}
+        }
+    }
+}

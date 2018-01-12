@@ -1,0 +1,12 @@
+.neos-empty-contentcollection-overlay{
+    margin:1em 0;
+}
+dd.hidden{
+    display: block!important;
+}
+.option-content .neos-empty-contentcollection-overlay{
+    background-color: #bce0ee;
+}
+.rules .neos-empty-contentcollection-overlay{
+     background-color: #eedecb;
+}

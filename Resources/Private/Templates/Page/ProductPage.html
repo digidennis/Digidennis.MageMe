@@ -1,0 +1,45 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+<f:section name="body">
+    {parts.menu -> f:format.raw()}
+    <section class="content">
+        {parts.breadcrumbs -> f:format.raw()}
+        <div class="product-wrapper">
+            <f:form action="add" controller="Cart" package="Digidennis.MageMe" name="add-cart" class="add-cart container" id="add-cart-form" data="{component:'Product', baseprice:baseprice, producttype:producttype}">
+                <f:if condition="{productslot}">
+                    <div class="hidden"
+                         data-component="Slot"
+                         data-pricemin="{productslot.min}"
+                         data-priceform="{productslot.price}"
+                         data-pricemax="{productslot.max}">
+                    </div>
+                </f:if>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-7 digidennis-mageme-productpage-slick">
+                        {content.slick -> f:format.raw()}
+                    </div>
+                    <div class="col-sm-6 col-lg-5 digidennis-mageme-productpage-sidebar">
+                        <neos:contentElement.wrap node="{node}">{neos:contentElement.editable(property:'title', tag: 'h1', node:node)}</neos:contentElement.wrap>
+                        <div class="digidennis-mageme-productpage-teaser">
+                            {neos:contentElement.editable(property:'teasercontent', tag: 'div', node:node)}
+                        </div>
+                        <div class="digidennis-mageme-productpage-summary" data-component="DimensionSummary"></div>
+                        <div class="digidennis-mageme-productpage-delivery-days-string">{deliverystring}</div>
+                        <div class="digidennis-mageme-productpage-product-return-policy">{productreturnpolicy}</div>
+                        <label for="qty">Antal</label>
+                        <input id="qty" name="qty" size="3" value="1" min="1" type="number" required="required">
+                        <input class="btn btn-primary" type="submit" value="Læg i indkøbskurv">
+                        <div class="digidennis-mageme-productpage-totalprice" data-component="TotalPrice" data-prefix="" data-currency-symbol="{currencySymbol}&nbsp;" data-postfix="<span>/stk</span>">0</div>
+                        <div class="digidennis-mageme-productpage-pricemeta">Prisen afspejler de valgte muligheder<br>inkl. moms</div>
+
+                    </div>
+                </div>
+                {content.dimensionsblock -> f:format.raw()}
+                {content.options -> f:format.raw()}
+                <f:form.hidden name="nodePath" value="{node.path}" />
+                <f:form.hidden name="nodeIdentifier" value="{node.identifier}" />
+            </f:form>
+        </div>
+        {content.main -> f:format.raw()}
+    </section>
+    {parts.footer -> f:format.raw()}
+</f:section>

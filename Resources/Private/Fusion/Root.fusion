@@ -1,0 +1,23 @@
+include: Prototypes/*
+
+prototype(Neos.NodeTypes:Page.Document){
+    body.parts.menu.postmenuitems{
+        accountLink = Neos.Fusion:Template{
+            templatePath = 'resource://Digidennis.MageMe/Private/Templates/FusionObjects/MageMenu.html'
+            sectionName = 'accountLink'
+        }
+        cartLink = Neos.Fusion:Template{
+            templatePath = 'resource://Digidennis.MageMe/Private/Templates/FusionObjects/MageMenu.html'
+            sectionName = 'cartLink'
+            quotecount = ${MageMe.CartHelper.getQuoteCount()}
+            cartnode = ${q(site).find('[instanceof Digidennis.MageMe:CartPage]').get(0)}
+            @cache {
+                mode = 'uncached'
+                context {
+                    1 = 'site'
+                }
+            }
+            @if.hascartnode = ${q(site).find('[instanceof Digidennis.MageMe:CartPage]').count() > 0}
+        }
+    }
+}

@@ -1,0 +1,13 @@
+{namespace mageme=Digidennis\MageMe\ViewHelpers}
+
+<f:if condition="{productslot.dimensions}">
+<dl class="interface">
+    <dt><h5>Mål</h5></dt>
+    <dd class="item item-is-selected">
+        <f:for each="{productslot.dimensions}" as="dimension">
+            <f:format.raw><mageme:dimension dimension="{dimension}" getarguments="{dimensionargs}"/></f:format.raw>
+        </f:for>
+        {dimensioncontent -> f:format.raw()}
+    </dd>
+</dl>
+</f:if>

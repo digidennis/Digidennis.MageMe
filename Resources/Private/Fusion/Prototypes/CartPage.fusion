@@ -1,0 +1,50 @@
+prototype(Digidennis.MageMe:CartPage.Document) < prototype(Neos.NodeTypes:Page.Document) {
+
+    bodyTag.attributes.class = 'digidennis-mageme-cartpage'
+
+    head.stylesheets.minify{
+        cartpage-mageme-frontend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMe.css'
+            }
+        }
+        cartpage-mageme-backend = Digidennis.Minify:Resource{
+            group = 'csshead'
+            path = Neos.Fusion:ResourceUri {
+                path = 'resource://Digidennis.MageMe/Public/Styles/MageMeBackend.css'
+
+            }
+            @if.isBackend = ${node.context.inBackend}
+        }
+    }
+    body{
+        templatePath = 'resource://Digidennis.MageMe/Private/Templates/Page/CartPage.html'
+        title = ${q(node).property('title')}
+        content{
+            cartcontent = Neos.Fusion:Template{
+                cartlink = ${ Configuration.setting('Digidennis.MageMe.protocol') + '://' + Configuration.setting('Digidennis.MageMe.host') + '/checkout/onepage' }
+                templatePath = 'resource://Digidennis.MageMe/Private/Templates/FusionObjects/CartContent.html'
+                quote = ${MageMe.CartHelper.getQuote()}
+                @cache {
+                    mode = 'uncached'
+                    context {
+                        1 = 'node'
+                    }
+                }
+            }
+            bar = ContentCollection{
+                nodePath = 'bar'
+            }
+
+        }
+        javascripts.minify{
+            cart-bootstrap = Digidennis.Minify:Resource{
+                group = 'jsbody'
+                path = Neos.Fusion:ResourceUri {
+                    path = 'resource://Digidennis.MageMe/Public/Javascript/Cart.js'
+                }
+            }
+        }
+    }
+}

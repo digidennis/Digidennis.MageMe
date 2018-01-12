@@ -1,0 +1,19 @@
+.digidennis-mageme-option > dd > ul.neos-contentcollection,
+.digidennis-mageme-optionbundleimage > dd > ul.neos-contentcollection {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.digidennis-mageme-option .SumoSelect,
+.digidennis-mageme-optionbundleimage .SumoSelect {
+  display: block;
+  width: 100%;
+}
+.digidennis-mageme-option dd .digidennis-mageme-dimension,
+.digidennis-mageme-optionbundleimage dd .digidennis-mageme-dimension {
+  display: none;
+}
+.digidennis-mageme-option dd.item-is-selected .digidennis-mageme-dimension,
+.digidennis-mageme-optionbundleimage dd.item-is-selected .digidennis-mageme-dimension {
+  display: inline-block;
+}

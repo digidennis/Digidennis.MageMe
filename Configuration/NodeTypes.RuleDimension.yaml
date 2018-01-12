@@ -1,0 +1,53 @@
+Digidennis.MageMe:RuleDimension:
+  label: ${'Rule Dimension'}
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Rule, depends on dimension'
+    icon: icon-gg
+    group: mageme
+    inspector:
+      groups:
+        magento:
+          label: Magento
+          position: 5
+  properties:
+    dependingdimension:
+      type: string
+      ui:
+        label: Depending Dimension
+        reloadIfChanged: TRUE
+        inspector:
+          group: magento
+          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            dataSourceIdentifier: 'digidennis-mageme-dimensionnodes'
+    truewhen:
+      type: string
+      defaultValue: grtthan
+      ui:
+        label: True when
+        reloadIfChanged: false
+        inspector:
+          group: magento
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            values:
+              grtthan:
+                label: 'Greater than'
+                icon: 'icon-chevron-right'
+              lssthan:
+                label: 'Less than'
+                icon: 'icon-chevron-left'
+    targetvalue:
+      type: string
+      ui:
+        label: Target Value
+        reloadIfChanged: TRUE
+        inspector:
+          group: magento
+
+Neos.Neos:ContentCollection:
+  constraints:
+    nodeTypes:
+      Digidennis.MageMe:RuleDimension: false

@@ -1,0 +1,33 @@
+{namespace mageme=Digidennis\MageMe\ViewHelpers}
+{namespace sitepack=Digidennis\SitePack\ViewHelpers}
+
+
+<dl {attributes -> f:format.raw()}>
+
+    <dt>
+        <h5>{selection.label}</h5> <span class="digidennis-mageme-option-toggle"></span>
+    </dt>
+
+    <f:format.raw>
+        <mageme:optionSelect selection="{selection}" slots="{optionslots}" getarguments="{requestarguments}"/>
+    </f:format.raw>
+
+    <dd>
+        <div data-component="OptionPrice" data-currency-symbol="{currencySymbol}" data-prefix="&nbsp;"></div>
+    </dd>
+
+    <f:if condition="{gotcontent}">
+        <dd>
+            {content -> f:format.raw()}
+            <div class="option-content-link">
+                <a data-target-selector="#content-{contentnodeidentifier}" data-active-class="content-show" data-target-active-class="content-show" href="#{contentnodeidentifier}"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
+            </div>
+        </dd>
+    </f:if>
+
+    <f:if condition="{rules}">
+        <dd class="hidden">
+            {rules -> f:format.raw()}
+        </dd>
+    </f:if>
+</dl>

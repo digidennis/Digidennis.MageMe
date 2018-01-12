@@ -1,0 +1,27 @@
+prototype(Digidennis.MageMe:Option) < prototype(Content){
+
+    attributes.class = ${(q(node).property('open') ? 'option-open interface' : 'interface')}
+    attributes.data-component = "Option"
+    attributes.data-optionid = ${q(node).property('optionid')}
+    currencySymbol = ${currencySymbol}
+    selection = ${MageMe.ProductHelper.optionSelection(q(documentNode).property('productid'),q(node).property('optionid'))}
+    optionslots =${MageMe.ProductHelper.getSlotsForOption(q(node).property('optionid'))}
+    requestarguments = ${request.arguments}
+    gotcontent = ${node.context.inBackend||q(node).children('content').children().count() > 0}
+    contentnodeidentifier = ${q(node).children('content').get(0).identifier}
+
+    content = ContentCollection{
+        nodePath = 'content'
+        attributes{
+            class = 'option-content'
+            id = ${'content-' + node.identifier}
+        }
+        @if.notEmptyOrBackend = ${node.context.inBackend || q(node).children().count() > 0}
+    }
+
+    rules = ContentCollection{
+        nodePath = 'rules'
+        attributes.class = 'rules'
+        @if.notEmptyOrBackend = ${node.context.inBackend || q(node).children().count() > 0}
+    }
+}

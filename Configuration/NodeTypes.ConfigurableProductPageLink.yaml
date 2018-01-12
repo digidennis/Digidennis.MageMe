@@ -1,0 +1,27 @@
+##
+# A simple "Login form" plugin that demonstrates "Frontend authorization"
+#
+'Digidennis.MageMe:ConfigurableProductPageLink':
+  superTypes:
+    'Neos.Neos:Plugin': TRUE
+
+  ui:
+    label: 'Konfigurer Produkt Link'
+    icon: icon-rebel
+    group: mageme
+    inspector:
+      groups:
+        main:
+          label: 'Indstillinger'
+
+  properties:
+    productid:
+      type: string
+      ui:
+        label: 'Vælg produkt'
+        reloadIfChanged: true
+        inspector:
+          group: main
+          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            dataSourceIdentifier: 'digidennis-mageme-productlist'

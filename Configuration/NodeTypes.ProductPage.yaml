@@ -1,0 +1,54 @@
+Digidennis.MageMe:ProductPage:
+  superTypes:
+    Neos.NodeTypes:Page: true
+  ui:
+    label: 'Product Page'
+    icon: icon-rebel
+    group: mageme
+    inlineEditable: true
+    inspector:
+      groups:
+        magento:
+          label: Magento
+          position: 5
+  childNodes:
+    slick:
+      type: Digidennis.SitePack:SlickCollection
+    dimensioncontent:
+      type: Neos.Neos:ContentCollection
+    options:
+      type: Neos.Neos:ContentCollection
+      constraints:
+        nodeTypes:
+          Digidennis.MageMe:Option: true
+          '*': false
+  properties:
+    title:
+      type: string
+      ui:
+        inlineEditable: true
+        inspector:
+          group: ~
+    productid:
+      type: string
+      ui:
+        label: SKU
+        reloadIfChanged: true
+        inspector:
+          group: magento
+          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            dataSourceIdentifier: 'digidennis-mageme-productlist'
+    teasercontent:
+      type: string
+      ui:
+        inlineEditable: TRUE
+        label: 'Teaser Content'
+        inspector:
+          group: ~
+
+
+Neos.NodeTypes:Page:
+  constraints:
+    nodeTypes:
+      Digidennis.MageMe:ProductPage: false

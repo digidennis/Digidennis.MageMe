@@ -1,0 +1,31 @@
+Digidennis.MageMe:ProductReference:
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Produkt reference'
+    icon: icon-hacker-news
+    group: mageme
+    inlineEditable: false
+    inspector:
+      groups:
+        main:
+          label: 'Produkt reference'
+          position: 5
+  properties:
+    showproductimage:
+      type: boolean
+      defaultValue: TRUE
+      ui:
+        label: 'Vis Produkt billed'
+        reloadIfChanged: true
+        inspector:
+          group: main
+    product:
+      type: reference
+      ui:
+        label: 'Produkt'
+        reloadIfChanged: true
+        inspector:
+          group: main
+          editorOptions:
+            nodeTypes: ['Digidennis.MageMe:ProductPage']

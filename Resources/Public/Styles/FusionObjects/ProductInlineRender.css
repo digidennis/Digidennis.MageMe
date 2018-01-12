@@ -1,0 +1,15 @@
+.digidennis-mageme-product-inline {
+  padding: 2em 1em;
+  text-align: center;
+  border: 1px dashed #cfcfcf;
+}
+.digidennis-mageme-product-inline img {
+  width: 100%;
+  width: calc(100% + 30px) !important;
+  margin-left: -15px;
+  margin-top: -15px;
+}
+.digidennis-mageme-product-inline > ul {
+  list-style: none;
+  padding: 0;
+}

@@ -1,0 +1,35 @@
+Digidennis:
+  MageMe:
+    magefile: '%FLOW_PATH_ROOT%/../DevKbhSkumMagento/app/Mage.php'
+    cartnodeidentifier: '1716eece-750b-4ba7-8320-34feb263bce7'
+    host: 'devshop.kbh-skum.dk'
+    protocol: 'http'
+
+Neos:
+  Neos:
+    fusion:
+      autoInclude:
+        'Digidennis.MageMe': TRUE
+    nodeTypes:
+      groups:
+        mageme:
+          position: 150
+          label: 'Magento'
+    modules:
+      mageme:
+        label: 'MageMe'
+        controller: '\Neos\Neos\Controller\Module\ManagementController'
+        description: 'Contains multiple modules related to management of My Project'
+        icon: 'icon-briefcase'
+        privilegeTarget: 'Digidennis.MageMe:BackendQuoteController'
+        submodules:
+          quotemodule:
+            label: 'Quote'
+            controller: 'Digidennis\MageMe\Controller\BackendQuoteController'
+            description: 'An Example for implementing Backend Modules'
+            icon: 'icon-star'
+            privilegeTarget: 'Digidennis.MageMe:BackendQuoteController'
+  Fusion:
+    defaultContext:
+      'MageMe.ProductHelper': 'Digidennis\MageMe\Eel\Helper\ProductHelper'
+      'MageMe.CartHelper': 'Digidennis\MageMe\Eel\Helper\CartHelper'

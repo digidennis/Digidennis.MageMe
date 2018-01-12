@@ -1,0 +1,16 @@
+prototype(Digidennis.MageMe:RuleOption) {
+    dependingoption = ${q(node).property('dependingoption')}
+    truewhen = ${q(node).property('truewhen')}
+    @context.magedependingoption = ${MageMe.ProductHelper.getOptionInProduct(q(node).property('dependingoption'), productid)}
+    @context.mageoption = ${MageMe.ProductHelper.getOptionInProduct(q(node).parent().parent().property('optionid'), productid)}
+    noticemsg = Neos.Fusion:Case {
+        hasselection {
+            condition = ${q(node).property('truewhen') == 'hasselection'}
+            renderer = ${mageoption.title + ' kan ikke vælges, da ' + magedependingoption.title + ' er valgt' }
+        }
+        noselection {
+            condition = ${q(node).property('truewhen') == 'hasselection'}
+            renderer = ${mageoption.title + ' kan ikke vælges, da ' + magedependingoption.title + ' ikke er valgt' }
+        }
+    }
+}

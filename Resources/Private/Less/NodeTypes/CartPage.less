@@ -1,0 +1,212 @@
+.digidennis-mageme-cartpage{
+  .btn-primary{
+    background-image: none;
+    background-color: #469dea;
+    line-height: 1.7em;
+    font-weight: 400;
+    box-shadow: 0 1px 5px -1px rgba(0, 0, 0, 0.4);
+    border-color: #469dea;
+    border-radius: 1px;
+    margin-bottom: 2em;
+  }
+
+  .shipping-estimate {
+    margin-bottom: 2em;
+    margin-top: 1em;
+    h5 {
+      font-weight: 700
+    }
+    .shipping-estimate-inner {
+       padding: 0
+     }
+    .form-control {
+      width: 120px;
+      float: left;
+      margin-right: .5em
+    }
+    .btn-default {
+      margin-right: .2em
+    }
+  }
+
+  .total-overview {
+    margin-bottom: 1em;
+    .shipping {
+      margin-top: 1em;
+    }
+    .amount {
+      padding-top: 1em;
+      margin-top: .6em;
+      border-top: 2px solid;
+      font-size: 1.4em;
+      font-weight: 600;
+    }
+    .shipping span,
+    .amount span {
+      float: right;
+      clear: both;
+    }
+    span.no-estimate {
+      float: none;
+      clear: none;
+      color: #767676;
+      font-style: italic;
+      &:after {
+        content: ')';
+      }
+      &:before {
+        content: ' (';
+      }
+    }
+    a.btn-primary {
+      margin-top: 1em;
+      width: 232px;
+      margin-bottom: 0;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .shipping-estimate {
+      margin-top:4em
+    }
+    .total-overview {
+      border-left: 2px solid #bbb;
+      margin-top: 1em
+    }
+    .shipping-estimate h5 {
+      margin: 0 0 1.2em
+    }
+  }
+
+  div.qoute-item-list {
+    border-top: 2px solid #585858;
+    border-bottom: 2px solid #585858
+  }
+
+  .quote-item {
+    border-bottom: 1px solid #bbb;
+    padding: 1em 0 1em 0;
+    background-color: white;
+    position: relative;
+    min-height:94px;
+  }
+
+  .quote-item:last-child {
+    border-bottom: none
+  }
+
+  .item-qty input[type="text"] {
+    width: 3em;
+    padding: 7px;
+    text-align: center
+  }
+
+  .item-qty>span {
+    text-align: center;
+    display: block;
+    font-weight: 700;
+    font-size: 1em;
+    width: 2em;
+    margin-top: .3em
+  }
+
+  .item-qty>input[type=submit] {
+    position: absolute;
+    z-index: 100;
+    top: -2px;
+    left: 4em;
+    display: block;
+    width: auto
+  }
+
+  .item-qty>input[type=submit].hidden {
+    display: none
+  }
+
+  .quote-item-options {
+    font-size: .85em;
+    line-height: 15px
+  }
+
+  .quote-item-options label {
+    margin: 0;
+    font-family: 'Open Sans',sans-serif
+  }
+
+  .quote-item .item h4 {
+    font-size: 1.1em;
+    margin: 0 0 4px
+  }
+
+  .quote-item .price.sub-total-tax {
+    margin-bottom: .2em
+  }
+
+  .quote-item .row-total {
+    text-align: right;
+    padding-right: 0;
+    padding-top: 1em
+  }
+
+  .quote-item .item-actions .item-delete {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    color: #888;
+    font-size: .9em
+  }
+
+  .quote-item .item-actions .item-delete label {
+    display: none;
+    vertical-align: text-top;
+    font-weight: 400
+  }
+
+  .quote-item .item-actions {
+    position: absolute;
+    left: .1em;
+    bottom: 5px;
+  }
+
+  .quote-item .item-actions .item-delete .glyphicon {
+    margin-right: .3em;
+    font-size: 1.2em;
+    line-height: 1.5em
+  }
+
+  @media screen and (min-width: 768px) {
+    .quote-item .item-actions {
+      right:0;
+      left: auto;
+      bottom: 5px
+    }
+
+    .quote-item .row-total {
+      text-align: right;
+      padding-right: 0;
+      padding-top: 0
+    }
+
+    .quote-item .item-actions .item-delete label {
+      display: inline
+    }
+
+    .item-qty input[type="text"] {
+      display: inline;
+      margin-right: .4em;
+      margin-left: 1em
+    }
+
+    .item-qty>span {
+      display: inline
+    }
+
+    .item-qty>input[type=submit] {
+      left: 80px
+    }
+
+    .row-total {
+      text-align: right
+    }
+  }
+}

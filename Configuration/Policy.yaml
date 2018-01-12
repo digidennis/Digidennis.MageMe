@@ -1,0 +1,30 @@
+privilegeTargets:
+
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+
+    'Digidennis.MageMe:CartController':
+      matcher: method(Digidennis\MageMe\Controller\CartController->.*())
+
+    'Digidennis.MageMe:ConfigurableProductPageLinkController':
+      matcher: method(Digidennis\MageMe\Controller\ConfigurableProductPageLinkController->.*())
+
+    'Digidennis.MageMe:BackendQuoteController':
+      matcher: method(Digidennis\MageMe\Controller\BackendQuoteController->.*Action())'
+
+
+roles:
+
+  'Neos.Neos:Editor':
+    privileges:
+      -
+        privilegeTarget: 'Digidennis.MageMe:BackendQuoteController'
+        permission: GRANT
+
+  'Neos.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'Digidennis.MageMe:CartController'
+        permission: GRANT
+      -
+        privilegeTarget: 'Digidennis.MageMe:ConfigurableProductPageLinkController'
+        permission: GRANT

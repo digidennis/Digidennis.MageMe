@@ -1,0 +1,26 @@
+prototype(Digidennis.MageMe:RuleDimension) {
+    dependingdimension = ${q(node).property('dependingdimension')}
+    truewhen = ${q(node).property('truewhen')}
+    targetvalue = ${q(node).property('targetvalue')}
+    @context.magedependingdimension = ${MageMe.ProductHelper.getDimension(q(node).property('dependingdimension'))}
+    @context.mageslot = ${MageMe.ProductHelper.getSlot(magedependingdimension.slot_id)}
+    @context.mageoption = ${MageMe.ProductHelper.getOptionInProduct(q(node).parent().parent().property('optionid'), productid)}
+    noticemsg = Neos.Fusion:Case {
+        grtthanandglobalslot {
+            condition = ${q(node).property('truewhen') == 'grtthan' && Type.isString(mageslot.option_type_id)}
+            renderer = ${mageoption.title + ' kan ikke vælges, da ' + magedependingdimension.label + '(' + mageslot.option_type_id + ') er større end ' + q(node).property('targetvalue') }
+        }
+        lssthanandglobalslot {
+            condition = ${q(node).property('truewhen') == 'lssthan' && Type.isString(mageslot.option_type_id)}
+            renderer = ${mageoption.title + ' kan ikke vælges, da ' + magedependingdimension.label + '(' + mageslot.option_type_id + ') er mindre end ' + q(node).property('targetvalue') }
+        }
+        grtthan {
+            condition = ${q(node).property('truewhen') == 'grtthan'}
+            renderer = ${mageoption.title + ' kan ikke vælges, da ' + magedependingdimension.label + ' er større end ' + q(node).property('targetvalue') }
+        }
+        lssthan {
+            condition = ${q(node).property('truewhen') == 'lssthan'}
+            renderer = ${mageoption.title + ' kan ikke vælges, da ' + magedependingdimension.label + ' er mindre end ' + q(node).property('targetvalue') }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+prototype(Digidennis.MageMe:ProductReference) < prototype(Content){
+
+    @class = 'Digidennis\\MageMe\\Fusion\\MageProductImplementation'
+    productid = ${q(q(node).property('product')).property('productid')}
+    node = ${node}
+    showproductimage = ${q(node).property('showproductimage')}
+    product = ${q(node).property('product')}
+
+    image = Neos.Neos:ImageTag{
+        asset = ${q(q(node).property('product')).children('slick').find('[instanceof Neos.NodeTypes:Image],[instanceof Neos.NodeTypes:TextWithImage]').first().property('image')}
+        width = 800
+        height = 534
+        allowCropping = true
+        allowUpScaling = true
+        @if.image = ${q(q(node).property('product')).children('slick').find('[instanceof Neos.NodeTypes:Image],[instanceof Neos.NodeTypes:TextWithImage]').count()>0}
+    }
+    dummyimage = Neos.Fusion:ResourceUri {
+        path = 'resource://Digidennis.MageMe/Public/Images/Dummy.svg'
+    }
+
+    teasercontent = ${q(q(node).property('product')).property('teasercontent')}
+    producttype = ${this.productType}
+    staticprice = ${this.staticPrice}
+    catalog = ${q(q(node).property('product')).parent().property('title')}
+    deliverystring = ${this.deliveryString}
+    productreturnpolicy = ${this.productReturnPolicy}
+
+    @cache {
+        mode = 'cached'
+        entryIdentifier {
+            node = ${q(node).property('product')}
+        }
+        entryTags {
+            1 = ${'NodeType_Digidennis.MageMe:ProductPage'}
+        }
+    }
+}

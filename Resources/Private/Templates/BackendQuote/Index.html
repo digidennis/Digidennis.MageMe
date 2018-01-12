@@ -1,0 +1,78 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+<div class="neos-content neos-container-fluid" xmlns:f="http://www.w3.org/1999/html">
+
+    <f:form action="update" controller="BackendQuote" package="Digidennis.MageMe" name="quote" object="{quote}"  id="quote-update">
+         <div class="neos-row-fluid">
+             <fieldset class="neos-span12">
+                 <legend>Quote</legend>
+                 <f:form.hidden name="quoteId" property="id" />
+                 <table class="neos-table">
+                     <thead>
+                         <tr>
+                             <th>Produkt</th>
+                             <th>Antal</th>
+                             <th>Stk</th>
+                             <th>Total</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <f:for each="{quote.quote.allVisibleItems}" as="item">
+                             <tr class="quote-item-parent">
+                                 <td>{item.name}</td>
+                                 <td><f:form.textfield name="items[{item.id}][qty]" value="{item.qty}"/></td></td>
+                                 <td><f:form.textfield name="items[{item.id}][priceInclTax]" value="{item.priceInclTax}"/></td>
+                                 <td>{item.rowTotalInclTax}</td>
+                                 <td>
+                                     <f:link.action action="removeItem" arguments="{itemId: item.id}" class="neos-button neos-button-danger" ><i class="icon-trash icon-white"></i></f:link.action></td>
+                             </tr>
+                             <f:for each="{item.children}" as="child">
+                                 <tr class="quote-item-child">
+                                     <td><span class="name" style="padding-left:30px;">{child.name}</span></td>
+                                     <td>-</td>
+                                     <td><f:form.textfield name="items[{item.id}][children][{child.id}][priceInclTax]" value="{child.priceInclTax}"/></td>
+                                     <td>-</td>
+                                     <td>-</td>
+                                 </tr>
+                             </f:for>
+                         </f:for>
+                     </tbody>
+                 </table>
+                 <f:form.submit name="Update" value="Opdater" class="neos-button neos-button-primary" />
+             </fieldset>
+         </div>
+        <div class="neos-row-fluid">
+            <fieldset class="neos-span6">
+                <legend>Afsend Tilbud</legend>
+                <div class="row">
+                    <div class="neos-control-group neos-span7">
+                        <label class="neos-control-label" for="email">E-mail</label>
+                        <div class="neos-controls">
+                            <f:form.textfield name="email" class="neos-span12"></f:form.textfield>
+                        </div>
+                    </div>
+                    <div class="neos-control-group neos-span5">
+                        <label class="neos-control-label" for="name">Navn</label>
+                        <div class="neos-controls neos-controls-row">
+                            <f:form.textfield name="name" class="neos-span12"></f:form.textfield>
+                        </div>
+                    </div>
+                </div>
+                <f:form.submit name="Send" value="Afsend" class="neos-button neos-button-primary" />
+            </fieldset>
+            <fieldset class="neos-span6">
+                <legend>Indsæt Produkt</legend>
+                <div class="row">
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="title">Produkt</label>
+                        <div class="neos-controls neos-controls-row">
+                            <f:form.select options="{productselect}" class="neos-span5" name="productid" />
+                        </div>
+                    </div>
+                </div>
+                <f:form.submit name="Add" value="Indsæt" class="neos-button neos-button-primary" />
+            </fieldset>
+        </div>
+     </f:form>
+
+    <div class="neos-footer"></div>
+</div>

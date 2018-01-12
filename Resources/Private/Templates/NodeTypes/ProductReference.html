@@ -1,0 +1,24 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+<div {attributes -> f:format.raw()}>
+    <f:if condition="{showproductimage}">
+        <f:if condition="{image}">
+            <f:then><neos:link.node node="{product}">{image -> f:format.raw()}</neos:link.node></f:then>
+            <f:else><neos:link.node node="{product}"><img src="{dummyimage}" /></neos:link.node></f:else>
+        </f:if>
+    </f:if>
+    <h3><neos:link.node node="{product}" >{title -> f:format.raw()}</neos:link.node></h3>
+    <f:if condition="{staticprice}">
+        <f:then>
+            <div class="price">{staticprice} <span>/stk</span></div>
+        </f:then>
+        <f:else>
+            <div class="price"><neos:link.node node="{product}">se pris</neos:link.node></div>
+        </f:else>
+    </f:if>
+    <ul>
+        <li>{catalog}</li>
+        <li>{deliverystring}</li>
+        <li>{productreturnpolicy}</li>
+    </ul>
+    <neos:contentElement.editable property="teasercontent" tag="div" class="teaser"/>
+</div>

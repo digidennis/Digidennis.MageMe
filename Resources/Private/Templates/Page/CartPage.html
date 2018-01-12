@@ -1,0 +1,13 @@
+{namespace neos=Neos\Neos\ViewHelpers}
+
+<f:section name="body">
+    {parts.menu -> f:format.raw()}
+    <section class="content">
+        {neos:contentElement.editable(property:'title', tag: 'h1')}
+        {content.bar -> f:format.raw()}
+        {content.cartcontent -> f:format.raw()}
+        {content.main -> f:format.raw()}
+    </section>
+    {parts.footer -> f:format.raw()}
+</f:section>
+

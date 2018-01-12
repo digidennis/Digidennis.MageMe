@@ -1,0 +1,25 @@
+Digidennis.MageMe:CartPage:
+  superTypes:
+    Neos.NodeTypes:Page: TRUE
+  ui:
+    label: 'The Cart'
+    icon: icon-shopping-cart
+    group: mageme
+    inspector:
+      groups:
+        magento:
+          label: 'Magento'
+          position: 5
+  childNodes:
+    bar:
+      type: Neos.Neos:ContentCollection
+
+Neos.NodeTypes:Page:
+  constraints:
+    nodeTypes:
+      Digidennis.MageMe:CartPage: FALSE
+
+Digidennis.SitePack:Homepage:
+  constraints:
+    nodeTypes:
+      Digidennis.MageMe:CartPage: TRUE

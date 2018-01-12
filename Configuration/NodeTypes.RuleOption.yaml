@@ -1,0 +1,46 @@
+Digidennis.MageMe:RuleOption:
+  label: ${'Rule Option'}
+  superTypes:
+    Neos.Neos:Content: true
+  ui:
+    label: 'Rule, depends on option'
+    icon: icon-gg
+    group: mageme
+    inspector:
+      groups:
+        magento:
+          label: Magento
+          position: 5
+  properties:
+    truewhen:
+      type: string
+      defaultValue: noselection
+      ui:
+        label: True when
+        reloadIfChanged: TRUE
+        inspector:
+          group: magento
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            values:
+              noselection:
+                label: 'No selection'
+                icon: 'icon-close'
+              hasselection:
+                label: 'Has Selection'
+                icon: 'icon-check'
+    dependingoption:
+      type: string
+      ui:
+        label: Depending Option
+        reloadIfChanged: TRUE
+        inspector:
+          group: magento
+          editor: 'Content/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            dataSourceIdentifier: 'digidennis-mageme-optionnodes'
+
+Neos.Neos:ContentCollection:
+  constraints:
+    nodeTypes:
+      Digidennis.MageMe:RuleOption: false
