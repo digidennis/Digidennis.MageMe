@@ -129,9 +129,9 @@ class MageCartService extends MageService
         $parsedrates = array();
         //$shippingAddress->setShippingMethod($rates->getCode());
         //$quote->collectTotals();
+        var_dump($rates->toArray());
         foreach($rates as $rate)
         {
-            var_dump($rate->getData());
             $parsedrates[] = [
                 'carrierTitle' => $rate->getCarrierTitle(),
                 'methodTitle' => $rate->getMethodTitle(),
