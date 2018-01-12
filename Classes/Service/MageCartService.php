@@ -138,6 +138,7 @@ class MageCartService extends MageService
                 'price' => floor(floatval($rate->getPrice()))
             ];
         }
+        var_dump($parsedrates);
         return $parsedrates;
     }
 
