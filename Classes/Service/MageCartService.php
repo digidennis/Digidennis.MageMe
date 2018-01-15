@@ -121,8 +121,13 @@ class MageCartService extends MageService
     {
         $country = 'DK';
         $shippingAddress = $quote->getShippingAddress();
-        $shippingAddress->setCountryId($country);
-        $quote->collectTotals();
+        if( $shippingAddress->getShippingRatesCollection() && $shippingAddress->getShippingRatesCollection()->getSize() == 0 )
+        {
+            $shippingAddress->setCountryId($country)
+                ->setCollectShippingRates(true)
+                ->collectShippingRates();
+        }
+
         $rates = ($shippingAddress->getShippingRatesCollection()->toArray())['items'];
 	    return $rates;
     }
