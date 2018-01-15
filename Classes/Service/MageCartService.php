@@ -122,25 +122,10 @@ class MageCartService extends MageService
         $country = 'DK';
         $shippingAddress = $quote->getShippingAddress();
         $shippingAddress->setCountryId($country)
-            ->setCollectShippingRates(true)
-            ->collectShippingRates();
+            ->setCollectShippingRates(true);
 
-        $rates = $shippingAddress->getShippingRatesCollection();
-        $parsedrates = array();
-        //$shippingAddress->setShippingMethod($rates->getCode());
-        //$quote->collectTotals();
-        var_dump($rates->toArray());
-        foreach($rates as $rate)
-        {
-            $parsedrates[] = [
-                'carrierTitle' => $rate->getCarrierTitle(),
-                'methodTitle' => $rate->getMethodTitle(),
-                'methodDescription' => $rate->getMethodDescription(),
-                'price' => floor(floatval($rate->getPrice()))
-            ];
-        }
-
-        return $parsedrates;
+        $rates = ($shippingAddress->getShippingRatesCollection()->toArray())['items'];
+	return $rates;
     }
 
     protected function parseQuoteItem( $itemarray, &$bucket )
