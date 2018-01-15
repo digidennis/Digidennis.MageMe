@@ -122,10 +122,10 @@ class MageCartService extends MageService
         $country = 'DK';
         $shippingAddress = $quote->getShippingAddress();
         $shippingAddress->setCountryId($country)
-            ->collectShippingRates()->save();
-
+            ->setCollectShippingRates(true);
+        $quote->collectTotals();
         $rates = ($shippingAddress->getShippingRatesCollection()->toArray())['items'];
-	return $rates;
+	    return $rates;
     }
 
     protected function parseQuoteItem( $itemarray, &$bucket )
