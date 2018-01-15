@@ -115,9 +115,9 @@
 .digidennis-mageme-cartpage .shipping-estimate {
   margin-bottom: 2em;
   margin-top: 30px;
-  text-align: center;
 }
 .digidennis-mageme-cartpage .shipping-estimate h5 {
+  text-align: center;
   font-weight: 700;
 }
 .digidennis-mageme-cartpage .shipping-estimate .shipping-estimate-inner {
@@ -140,7 +140,7 @@
 }
 .digidennis-mageme-cartpage .total-overview .amount {
   padding-top: 1em;
-  margin-top: .6em;
+  margin-top: 28px;
   border-top: 2px solid;
   font-size: 1.4em;
   font-weight: 600;
@@ -172,7 +172,7 @@
     margin-top: 30px;
   }
   .digidennis-mageme-cartpage .total-overview {
-    border-left: 2px solid #bbb;
+    border-left: 1px solid #aaa;
     margin-top: 30px;
   }
   .digidennis-mageme-cartpage .shipping-estimate h5 {
