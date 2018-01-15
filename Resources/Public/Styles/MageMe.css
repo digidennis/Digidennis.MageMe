@@ -114,7 +114,8 @@
 }
 .digidennis-mageme-cartpage .shipping-estimate {
   margin-bottom: 2em;
-  margin-top: 1em;
+  margin-top: 30px;
+  text-align: center;
 }
 .digidennis-mageme-cartpage .shipping-estimate h5 {
   font-weight: 700;
@@ -125,13 +126,14 @@
 .digidennis-mageme-cartpage .shipping-estimate .form-control {
   width: 120px;
   float: left;
-  margin-right: 0.5em;
+  margin-right: .5em;
 }
 .digidennis-mageme-cartpage .shipping-estimate .btn-default {
-  margin-right: 0.2em;
+  margin-right: .2em;
 }
 .digidennis-mageme-cartpage .total-overview {
   margin-bottom: 1em;
+  margin-top: 15px;
 }
 .digidennis-mageme-cartpage .total-overview .shipping {
   margin-top: 1em;
@@ -167,11 +169,11 @@
 }
 @media screen and (min-width: 768px) {
   .digidennis-mageme-cartpage .shipping-estimate {
-    margin-top: 4em;
+    margin-top: 30px;
   }
   .digidennis-mageme-cartpage .total-overview {
     border-left: 2px solid #bbb;
-    margin-top: 1em;
+    margin-top: 30px;
   }
   .digidennis-mageme-cartpage .shipping-estimate h5 {
     margin: 0 0 1.2em;
