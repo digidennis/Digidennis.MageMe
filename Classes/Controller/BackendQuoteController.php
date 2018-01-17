@@ -93,7 +93,7 @@ class BackendQuoteController extends ActionController
             }
             $quote->unWrap()->collectTotals();
         }
-        $this->forward('index');
+        //$this->forward('index');
     }
     /**
      * @param MageQuoteWrapper $quote
