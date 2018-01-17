@@ -50,6 +50,7 @@ class BackendQuoteController extends ActionController
             )
         );
     }
+
     /**
      * @param MageQuoteWrapper $quote
      * @param array $items
@@ -119,22 +120,27 @@ class BackendQuoteController extends ActionController
         $ourQuote->setEmail($email);
         $ourQuote->setSerializedQuote(QuoteHelper::mageQuoteToDataArray($quote));
         $this->quoteRepository->add($ourQuote);
+        $link = "https://kbh-skum.dk/mageme/cart/quote?quoteId={$this->persistenceManager->getIdentifierByObject($ourQuote)}";
 
-        $mail = new \Neos\SwiftMailer\Message();
+        if($email)
+        {
+            $mail = new \Neos\SwiftMailer\Message();
 
-        $mail
-            ->setFrom(array('service@kbh-skum.dk' => 'KBH SKUM ApS'))
-            ->setTo(array($email => $name ))
-            ->setSubject('Tilbud fra KBH SKUM');
-
-        $message = "Hej {$name}
+            $mail
+                ->setFrom(array('service@kbh-skum.dk' => 'KBH SKUM ApS'))
+                ->setTo(array($email => $name ))
+                ->setSubject('Tilbud fra KBH SKUM');
+            $message = "Hej {$name}
         
 Hermed fremsendes tilbud.
-Klik på nedenstående link som vil tage dig til Indkøbskurven på kbh-skum.dk.
+Klik på nedenstående link som vil tage dig til en oprettet indkøbskurven på vores hjemmeside.
         
-https://kbh-skum.dk/mageme/cart/quote?quoteId={$this->persistenceManager->getIdentifierByObject($ourQuote)}";
-        $mail->setBody($message, 'text/plain');
-        $mail->send();
+{$link}";
+            $mail->setBody($message, 'text/plain');
+            $mail->send();
+        }
+
+        $this->view->assign('quotelink', $link);
     }
 
     /**
