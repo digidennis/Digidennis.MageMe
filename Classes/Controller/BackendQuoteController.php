@@ -94,6 +94,12 @@ class BackendQuoteController extends ActionController
             $quote->unWrap()->collectTotals();
         }
         //$this->forward('index');
+        $this->view->assignMultiple(
+            array(
+                'productselect' => $this->getProductList(),
+                'quote' => new MageQuoteWrapper(),
+            )
+        );
     }
     /**
      * @param MageQuoteWrapper $quote
