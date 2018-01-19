@@ -48,7 +48,16 @@ class QuoteHelper
     {
         $itemsdata = array();
         $dataarray = ['data' => $quote->unWrap()->getData()];
+
         unset($dataarray['data']['entity_id']);
+        unset($dataarray['data']['customer_id]']);
+        unset($dataarray['data']['customer_tax_class_id']);
+        unset($dataarray['data']['customer_group_id']);
+        unset($dataarray['data']['customer_email']);
+        unset($dataarray['data']['customer_firstname']);
+        unset($dataarray['data']['customer_lastname']);
+        $dataarray['data']['customer_is_guest'] = 1;
+
         foreach ($quote->unWrap()->getAllItems() as $item )
         {
             $itemdata = ['data' => $item->getData()];
