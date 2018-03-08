@@ -60,9 +60,11 @@ class CartController extends ActionController
      * @param array $options
      * @param int $qty
      * @param array $dimensions
+     * @param int $itemid
      * @return mixed
+     * @throws
      */
-    public function addAction(NodeInterface $nodePath, $bundle_option = null, $options = null, $qty=1, $dimensions = null)
+    public function addAction(NodeInterface $nodePath, $bundle_option = null, $options = null, $qty=1, $dimensions = null, $itemid = null)
     {
         $cart = $this->cartService->getCart();
         $product = $this->productService->getProductById($nodePath->getProperty('productid'));
@@ -98,6 +100,10 @@ class CartController extends ActionController
             $params['options'] = $sanitizedOptions;
         }
 
+        if($itemid)
+        {
+            $cart->removeItem($itemid);
+        }
 
         if($dimensions)
             $params['dimensions'] = $dimensions;

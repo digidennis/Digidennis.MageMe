@@ -7,15 +7,27 @@
  */
 
 namespace Digidennis\MageMe\Service;
+use Neos\Eel\FlowQuery\FlowQuery;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Exception;
-
+use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
+use Neos\Neos\Domain\Service\NodeSearchService;
 
 /**
  * @Flow\Scope("singleton")
  */
 class MageProductService extends MageService
 {
+    /**
+     * @Flow\Inject
+     * @var ContextFactoryInterface
+     */
+    protected $contextFactory;
+    /**
+     * @Flow\Inject
+     * @var NodeSearchService
+     */
+    protected $nodeSearchService;
 
     public function formatPrice($amount)
     {
@@ -160,5 +172,13 @@ class MageProductService extends MageService
     {
         return \Mage::helper($helper);
     }
-    
+
+    public function getNeosNodeFromProductId($id, $workspace = 'live')
+    {
+        $context = $this->contextFactory->create(array('workspaceName'=>$workspace));
+        $node = array_values($this->nodeSearchService->findByProperties(['productid' => $id],['Digidennis.MageMe:ProductPage'],$context ));
+        if( count($node))
+            return $node[0];
+        return false;
+    }
 }

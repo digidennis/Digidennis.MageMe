@@ -140,7 +140,7 @@ class OptionSelectViewHelper extends AbstractViewHelper
     
     private function renderCheckbox($selection, $item, $slot=false, $getargument=false, $index)
     {
-        $buffer = "<div class=\"digidennis-mageme-option-select\"><label for=\"option -{$selection['optionId']}-{$item['selectionId']}\">{$item['name']}</label><select id=\"option-{$selection['optionId']}-{$item['selectionId']}\"
+        $buffer = "<div class=\"digidennis-mageme-option-select\"><label for=\"option-{$selection['optionId']}-{$item['selectionId']}\">{$item['name']}</label><select id=\"option-{$selection['optionId']}-{$item['selectionId']}\"
                     class=\"option-select\"
                     data-placeholder=\"{$item['name']}\"
                     data-component=\"SumoSelect\"
@@ -152,10 +152,14 @@ class OptionSelectViewHelper extends AbstractViewHelper
         if($slot)
             $buffer .= " data-component=\"Slot\" data-priceform=\"{$slot['price']}\" data-pricemin=\"{$slot['min']}\" data-pricemax=\"{$slot['max']}\" ";
 
-        if(key_exists($selection['optionId'], $getargument ) &&
-            key_exists($item['selectionId'], $getargument[$selection['optionId']]) &&
-                $getargument[$selection['optionId']][$item['selectionId']] == '1')
-            $buffer .= "selected=\"true\" ";
+
+        if(key_exists($selection['optionId'], $getargument )){
+            foreach ($getargument[$selection['optionId']] as $arg)
+            {
+                if($arg == $item['selectionId'])
+                    $buffer .= "selected=\"true\" ";
+            }
+        }
         elseif( $selection['isRequired'] && $index == 0)
             $buffer .= "selected=\"true\" ";
 

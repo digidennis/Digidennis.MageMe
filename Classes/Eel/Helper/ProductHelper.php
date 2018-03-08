@@ -127,6 +127,10 @@ class ProductHelper implements ProtectedContextAwareInterface
         return $this->productService->getSlot($slotid);
     }
 
+    public function getNeosNodeFromProductId($id)
+    {
+        return $this->productService->getNeosNodeFromProductId($id);
+    }
     /**
      * All methods are considered safe, i.e. can be executed from within Eel
      *

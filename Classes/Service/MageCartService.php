@@ -10,18 +10,20 @@ namespace Digidennis\MageMe\Service;
 
 use Neos\Flow\Annotations as Flow;
 
-
 /**
  * @Flow\Scope("singleton")
  */
 class MageCartService extends MageService
 {
-
+    /**
+     * @Flow\Inject
+     * @var \Digidennis\MageMe\Service\MageProductService
+     */
+    protected $productService;
     /**
      * @var \Mage_Checkout_Model_Session
      */
     protected $checkoutSession;
-
     //parsed quote cache
     protected $parsedQuote;
     
@@ -30,7 +32,6 @@ class MageCartService extends MageService
         parent::initializeObject();
         $this->checkoutSession = \Mage::getSingleton('checkout/session');
     }
-
     /**
      * @return \Mage_Sales_Model_Quote
      */
@@ -46,7 +47,6 @@ class MageCartService extends MageService
         $quote = \Mage::getModel('sales/quote')->load($id);
         return $quote;
     }
-
     /**
      * @return \Mage_Checkout_Model_Cart
      */
@@ -62,7 +62,6 @@ class MageCartService extends MageService
     {
         return $this->checkoutSession;
     }
-
     /**
      * Get List Of Quotes
      * @return array
@@ -76,8 +75,6 @@ class MageCartService extends MageService
         }
         return $result;
     }
-
-
     /**
      * Get Empty Quote
      * @return mixed
@@ -108,7 +105,6 @@ class MageCartService extends MageService
         }
         return $this->parsedQuote;
     }
-
     /**
      * @return string
      */
@@ -145,9 +141,34 @@ class MageCartService extends MageService
                 'qty' => $item->getQty(),
                 'name' => $item->getName(),
                 'itemId' => $item->getId(),
+                'buyRequest' => $this->parseBuyRequest($item),
+                'neosnode' => $this->productService->getNeosNodeFromProductId($item->getProductId())
             );
 
             $bucket[] = $parsedQuoteItem;
         }
     }
+
+    protected function parseBuyRequest($item)
+    {
+        $parsedbuyrequest = array();
+        $buyRequest = unserialize($item->getOptionByCode('info_buyRequest')->getValue());
+        if(count($buyRequest))
+        {
+            if(key_exists('dimensions', $buyRequest) )
+            {
+                foreach ($buyRequest['dimensions'] as $key => $value)
+                {
+                    $parsedbuyrequest['dimensions'][$key] = $value['value'];
+                }
+            }
+            if(key_exists('options', $buyRequest) )
+            {
+                $parsedbuyrequest['options'] = $buyRequest['options'];
+            }
+        }
+        $parsedbuyrequest['edit'] = $item->getItemId();
+        return $parsedbuyrequest;
+    }
+
 }

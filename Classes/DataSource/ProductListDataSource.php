@@ -38,8 +38,8 @@ class ProductListDataSource extends AbstractDataSource
         $products = \Mage::getModel('catalog/product')->getCollection()
             ->addAttributeToSelect('name')
             ->addAttributeToSelect('id')
-            ->addAttributeToSelect('type')
-        ;
+            ->addAttributeToSelect('type');
+
         $result = array();
         foreach ($products as $product )
         {
@@ -50,4 +50,5 @@ class ProductListDataSource extends AbstractDataSource
         }
         return $result;
     }
+
 }

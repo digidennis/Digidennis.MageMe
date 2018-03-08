@@ -16,6 +16,7 @@ prototype(Digidennis.MageMe:ProductPage.Document) < prototype(Neos.NodeTypes:Pag
         currencySymbol = ${currencySymbol}
         templatePath = 'resource://Digidennis.MageMe/Private/Templates/Page/ProductPage.html'
         sectionName = 'body'
+        itemid = ${request.arguments.edit}
         title = ${q(node).property('title')}
 
         content {
@@ -122,6 +123,7 @@ prototype(Digidennis.MageMe:ProductPage.Document) < prototype(Neos.NodeTypes:Pag
             node = ${node}
             dimensions = ${ "dimensions=" + Json.stringify(request.arguments.dimensions)}
             options = ${ "options=" + Json.stringify(request.arguments.options)}
+            edit = ${ "edit=" + Json.stringify(request.arguments.edit) }
         }
 
         entryTags {
