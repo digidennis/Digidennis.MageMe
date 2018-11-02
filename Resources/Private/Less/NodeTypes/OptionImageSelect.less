@@ -1,66 +1,56 @@
 .digidennis-mageme-optionimageselect{
-  .digidennis-mageme-optionimageselect-select{
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
 
-    li {
-      display: inline-block;
+  input[type="checkbox"],
+  input[type="radio"]{
+    display: none;
+  }
+  .row{
+    margin-right: 0;
+    label.col-sm-2.col-xs-4 {
+      font-size: 1em;
+      margin-bottom: auto;
+      padding-right:0;
+      &:before {
+        background-color: white;
+        color: white;
+        content: " ";
+        display: block;
+        border-radius: 50%;
+        position: absolute;
+        top: -2px;
+        right: -3px;
+        width: 25px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        transition-duration: 0.4s;
+        transform: scale(0);
+        z-index: 1;
+      }
+      img {
+        transition-duration: 0.2s;
+        transform-origin: 50% 50%;
+        width: 100%;
+        height: auto;
+      }
+      p{
+        text-align: center;
+        font-size:14px;
+        margin-top:-3px;
+        margin-bottom: 10px;
+      }
     }
-
-    input[type="checkbox"],
-    input[type="radio"]{
-      display: none;
-    }
-
-    label {
-      border: 1px solid #d8d8d8;
-      display: block;
-      position: relative;
-      cursor: pointer;
-    }
-
-    label:before {
-      background-color: white;
-      color: white;
-      content: " ";
-      display: block;
-      border-radius: 50%;
-      border: 1px solid grey;
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: 25px;
-      height: 25px;
-      text-align: center;
-      line-height: 28px;
-      transition-duration: 0.4s;
-      transform: scale(0);
-      z-index:1;
-    }
-
-    label img {
-      height: auto;
-      width: 100px;
-      transition-duration: 0.2s;
-      transform-origin: 50% 50%;
-    }
-
-    :checked + label {
-      border-color: #ddd;
-    }
-
-    :checked + label:before {
+  }
+  :checked + label.col-sm-2.col-xs-4{
+    &:before {
       content: "✓";
-      background-color: grey;
+      background-color: #2fd9ff;
       transform: scale(1);
+      font-weight: 800;
+      font-size: 16px;
     }
-
-    :checked + label img {
+    img {
       transform: scale(0.9);
-      box-shadow: 0 0 5px #333;
       z-index: -1;
     }
   }

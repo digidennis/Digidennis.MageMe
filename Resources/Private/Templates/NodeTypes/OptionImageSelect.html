@@ -5,37 +5,37 @@
 
 <dl {attributes -> f:format.raw()}>
     <dt>
-        <h5>{selection.label}</h5> <span class="digidennis-mageme-option-toggle"></span>
+        <h5>{selection.label}</h5>
     </dt>
-    <dd data-component="Item" class="digidennis-mageme-optionimageselect-select">
-        <ul data-component="OptionImageSelect">
-            <f:for each="{selection.items}" as="item" key="index">
-                <li>
-                    <f:format.raw>
-                        <mageme:imageSelectInput selection="{selection}" item="{item}" index="{index}" optionid="{optionid}" getargument="{getargument}"/>
-                    </f:format.raw>
-                    <label for="{item.selectionId}">
-                        <f:if condition="{images}">
-                            <f:format.raw>
-                                <sitepack:renderAtIndex array="{images}" index="{index}" address="obj">
-                                    <ts:render path="imagerenderer" context="{node: obj, title: item.name}"/>
-                                </sitepack:renderAtIndex>
-                            </f:format.raw>
-                        </f:if>
-                    </label>
-                </li>
+    <dd data-component="Item" class="item-is-selected">
+        <div class="row">
+            <f:for each="{assets}" as="asset" iteration="assetsItt">
+                <f:if condition="{selection.isMulti}">
+                   <f:then>
+                       <input type="checkbox"
+                              <f:if condition="{selection.isRequired} && {assetsItt.isFirst}"> checked="checked" </f:if>
+                              value="{asset.optionTypeId}"
+                              name="options[{optionid}]"
+                              id="option-type-id-{asset.optionTypeId}">
+                   </f:then>
+                   <f:else>
+                       <input type="radio"
+                              <f:if condition="{selection.isRequired} && {assetsItt.isFirst}"> checked="checked" </f:if>
+                              value="{asset.optionTypeId}"
+                              name="options[{optionid}]"
+                              id="option-type-id-{asset.optionTypeId}">
+                   </f:else>
+                </f:if>
+                <label class="col-sm-2 col-xs-4" for="option-type-id-{asset.optionTypeId}">
+                    <neos.media:thumbnail asset="{asset.asset}" width="250"  alt="{asset.title}" class="option-image-select-image" />
+                    <p>{asset.title}</p>
+                </label>
             </f:for>
-        </ul>
-    </dd>
-    <dd>
-        <div data-component="OptionPrice" data-currency-symbol="{currencySymbol}" data-prefix="&nbsp;"></div>
+        </div>
     </dd>
     <f:if condition="{gotcontent}">
         <dd>
             {content -> f:format.raw()}
-            <div class="option-content-link">
-                <a data-target-selector="#content-{contentnodeidentifier}" data-active-class="content-show" data-target-active-class="content-show" href="#{contentnodeidentifier}"><i class="fa fa-chevron-down" aria-hidden="true"></i></a>
-            </div>
         </dd>
     </f:if>
     <f:if condition="{rules}">

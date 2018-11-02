@@ -1,8 +1,7 @@
 prototype(Digidennis.MageMe:OptionImageSelect) < prototype(Digidennis.MageMe:Option) {
+    @class = 'Digidennis\\MageMe\\Fusion\\OptionImageSelectImplementation'
     optionid = ${q(node).property('optionid')}
-    imagerenderer = Neos.NodeTypes:Image{
-        attributes.data-node-identifier = ${node.identifier}
-        maximumWidth = 200
-        title = ${title}
-    }
+    collection = ${q(node).property('collection')}
+    tag = ${q(node).property('tag')}
+    assets = ${this.assetsWithTagInCollection}
 }

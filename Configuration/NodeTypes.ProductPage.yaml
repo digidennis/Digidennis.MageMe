@@ -1,4 +1,22 @@
 Digidennis.MageMe:ProductPage:
+  options:
+    template:
+      childNodes:
+        maintextCollection:
+          name: maintext
+          childNodes:
+            textNode:
+              type: 'Neos.NodeTypes:Text'
+              properties:
+                text: '<p>Hello world!</p>'
+        teasertextCollection:
+          name: teasertext
+          childNodes:
+            textNode:
+              type: 'Neos.NodeTypes:Text'
+              properties:
+                text: '<p>Hello world!</p>'
+
   superTypes:
     Neos.NodeTypes:Page: true
   ui:
@@ -14,21 +32,20 @@ Digidennis.MageMe:ProductPage:
   childNodes:
     slick:
       type: Digidennis.SitePack:SlickCollection
-    dimensioncontent:
-      type: Neos.Neos:ContentCollection
     options:
       type: Neos.Neos:ContentCollection
       constraints:
         nodeTypes:
           Digidennis.MageMe:Option: true
           '*': false
+    teasertext:
+      type: Neos.Neos:ContentCollection
+    maintext:
+      type: Neos.Neos:ContentCollection
+    dimensioncontent:
+      type: Neos.Neos:ContentCollection
+
   properties:
-    title:
-      type: string
-      ui:
-        inlineEditable: true
-        inspector:
-          group: ~
     productid:
       type: string
       ui:
@@ -42,11 +59,10 @@ Digidennis.MageMe:ProductPage:
     teasercontent:
       type: string
       ui:
-        inlineEditable: TRUE
         label: 'Teaser Content'
         inspector:
-          group: ~
-
+          group: magento
+          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
 
 Neos.NodeTypes:Page:
   constraints:

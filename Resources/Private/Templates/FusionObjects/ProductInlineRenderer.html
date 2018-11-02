@@ -16,9 +16,7 @@
         </f:else>
     </f:if>
     <f:if condition="{showproductteaser}">
-        <neos:contentElement.wrap node="{node}">
-            <neos:contentElement.editable property="teasercontent" tag="div" class="teaser"/>
-        </neos:contentElement.wrap>
+        {teasertext -> f:format.raw()}
     </f:if>
     <ul>
         <!--li>{catalog}</li-->

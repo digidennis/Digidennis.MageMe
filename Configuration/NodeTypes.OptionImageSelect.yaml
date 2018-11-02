@@ -1,15 +1,20 @@
 Digidennis.MageMe:OptionImageSelect:
-  label: ${'Bundle Option ' +q(node).property('optiontitle')}
   superTypes:
     Digidennis.MageMe:Option: true
   ui:
-    label: 'Bundle Option Imageselect'
+    label: 'Option Imageselect'
   properties:
-    images:
-      type: references
+    collection:
+      type: string
       ui:
-        label: 'Images for selection'
+        label: 'Collection name'
+        reloadIfChanged: true
         inspector:
-          group: 'magento'
-          editorOptions:
-            nodeTypes: ['Neos.NodeTypes:Image']
+          group: magento
+    tag:
+      type: string
+      ui:
+        label: 'Collection tag'
+        reloadIfChanged: true
+        inspector:
+          group: magento

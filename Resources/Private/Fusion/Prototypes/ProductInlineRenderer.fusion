@@ -15,11 +15,16 @@ prototype(Digidennis.MageMe:ProductInlineRenderer) < prototype(Content) {
         allowUpScaling = true
         @if.image = ${q(node).children('slick').find('[instanceof Neos.NodeTypes:Image],[instanceof Neos.NodeTypes:TextWithImage]').count()>0}
     }
+
     dummyimage = Neos.Fusion:ResourceUri {
         path = 'resource://Digidennis.MageMe/Public/Images/Dummy.svg'
     }
 
-    teasercontent = ${q(node).property('teasercontent')}
+    teasertext = Neos.Neos:ContentCollection{
+        attributes.class = 'teaser'
+        nodePath = 'teasertext'
+    }
+
     producttype = ${this.productType}
     staticprice = ${this.staticPrice}
     catalog = ${q(node).parent().property('title')}

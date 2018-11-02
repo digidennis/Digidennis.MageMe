@@ -111,8 +111,8 @@ class MageProductImplementation extends TemplateImplementation
 
     public function getStaticPrice()
     {
-        if( $this->getHasDimensions() )
-            return false;
+        if( $this->getHasDimensions() && $this->getMageProduct()->getDimensionInitialprice() <> '' )
+            return 'Fra ' . number_format( $this->getMageProduct()->getDimensionInitialprice(), 0, ",", ".") . ' kr';
 
         $priceModel = $this->getMageProduct()->getPriceModel();
         switch ( $this->getProductType() )

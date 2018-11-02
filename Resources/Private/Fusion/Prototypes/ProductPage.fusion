@@ -28,6 +28,10 @@ prototype(Digidennis.MageMe:ProductPage.Document) < prototype(Neos.NodeTypes:Pag
                 nodePath = 'slick'
                 @context.node = ${q(node).children('slick').get(0)}
             }
+            maintext = Neos.Neos:ContentCollection{
+                nodePath = 'maintext'
+                @if.notEmptyOrBackend = ${node.context.inBackend || q(documentNode).children('maintext').children().count() > 0}
+            }
             dimensionsblock = Neos.Fusion:Template{
                 templatePath = 'resource://Digidennis.MageMe/Private/Templates/FusionObjects/DimensionBlock.html'
                 dimensioncontentidentifier = ${q(node).children('dimensioncontent').get(0).identifier}

@@ -16,10 +16,10 @@ Digidennis.MageMe:Option:
     rules:
       type: Neos.Neos:ContentCollection
       constraints:
-          nodeTypes:
-            Digidennis.MageMe:RuleOption: true
-            Digidennis.MageMe:RuleDimension: true
-            '*': false
+        nodeTypes:
+          Digidennis.MageMe:RuleOption: true
+          Digidennis.MageMe:RuleDimension: true
+          '*': false
     content:
       type: Neos.Neos:ContentCollection
   properties:

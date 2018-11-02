@@ -1,6 +1,6 @@
 prototype(Digidennis.MageMe:Option) < prototype(Content){
 
-    attributes.class = ${(q(node).property('open') ? 'option-open interface' : 'interface')}
+    attributes.class = 'interface'
     attributes.data-component = "Option"
     attributes.data-optionid = ${q(node).property('optionid')}
     currencySymbol = ${currencySymbol}

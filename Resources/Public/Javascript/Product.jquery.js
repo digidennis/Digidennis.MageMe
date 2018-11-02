@@ -14,7 +14,11 @@
                     locale: ['OK', 'Annuller', 'Vælg alt'],
                     captionFormat: '{0} Valgt',
                     captionFormatAllSelected: '{0} Valgt',
-                    floatWidth: 50
+                    noMatch: 'Intet med "{0}"',
+                    search: true,
+                    searchText: 'Søg..',
+                    up: true,
+                    floatWidth:30,
                 });
             });
             $("[data-component='SumoSelect']").on('change', _update);
@@ -115,10 +119,10 @@
                         $(this).removeClass('item-is-selected')
                     });
                 }
-                _updateOptionPrice(optionid,optiontotalprice);
+                //_updateOptionPrice(optionid,optiontotalprice);
             });
             _updateTotalPrice(totalprice);
-            _updateSummary();
+            //_updateSummary();
         };
         var _updateSummary = function(){
             var labels = Array();
@@ -138,7 +142,7 @@
             }
             $element.find("[data-component='DimensionSummary']").html(buf);
         };
-        var _updateOptionPrice = function( option, price ){
+        /*var _updateOptionPrice = function( option, price ){
             $("[data-component='Option'][data-optionid='" + option  + "']").each(function(){
                 var priceelm = $(this).find("[data-component='OptionPrice']").first(),
                     prefix = priceelm.attr('data-prefix') ? priceelm.attr('data-prefix'): '',
@@ -146,7 +150,7 @@
                     symbol = priceelm.attr('data-currency-symbol') ? priceelm.attr('data-currency-symbol') : '';
                 priceelm.html(symbol + prefix + price.toLocaleString() + postfix);
             });
-        };
+        };*/
         var _updateTotalPrice = function(  price ){
             $("[data-component='TotalPrice']").each(function(){
                 var prefix = $(this).attr('data-prefix') ? $(this).attr('data-prefix'): '',
