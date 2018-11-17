@@ -19,10 +19,12 @@ prototype(Digidennis.MageMe:CartPage.Document) < prototype(Neos.NodeTypes:Page.D
         }
     }
     body{
+        quotecount = ${Math.trunc(String.toFloat(MageMe.CartHelper.getQuote().itemCount))}
         templatePath = 'resource://Digidennis.MageMe/Private/Templates/Page/CartPage.html'
         title = ${q(node).property('title')}
         content{
             cartcontent = Neos.Fusion:Template{
+                quotecount = ${Math.trunc(String.toFloat(MageMe.CartHelper.getQuote().itemCount))}
                 cartlink = ${ Configuration.setting('Digidennis.MageMe.protocol') + '://' + Configuration.setting('Digidennis.MageMe.host') + '/checkout/onepage' }
                 templatePath = 'resource://Digidennis.MageMe/Private/Templates/FusionObjects/CartContent.html'
                 quote = ${MageMe.CartHelper.getQuote()}
@@ -30,13 +32,22 @@ prototype(Digidennis.MageMe:CartPage.Document) < prototype(Neos.NodeTypes:Page.D
                     mode = 'uncached'
                     context {
                         1 = 'node'
+                        2 = 'documentNode'
+                        3 = 'site'
                     }
                 }
             }
             bar = ContentCollection{
                 nodePath = 'bar'
             }
-
+            @cache {
+                mode = 'uncached'
+                context {
+                    1 = 'node'
+                    2 = 'documentNode'
+                    3 = 'site'
+                }
+            }
         }
         javascripts.minify{
             cart-bootstrap = Digidennis.Minify:Resource{
@@ -44,6 +55,14 @@ prototype(Digidennis.MageMe:CartPage.Document) < prototype(Neos.NodeTypes:Page.D
                 path = Neos.Fusion:ResourceUri {
                     path = 'resource://Digidennis.MageMe/Public/Javascript/Cart.js'
                 }
+            }
+        }
+        @cache {
+            mode = 'uncached'
+            context {
+                1 = 'node'
+                2 = 'documentNode'
+                3 = 'site'
             }
         }
     }

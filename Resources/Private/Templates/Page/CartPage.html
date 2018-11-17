@@ -3,8 +3,17 @@
 <f:section name="body">
     {parts.menu -> f:format.raw()}
     <section class="content">
-        {content.cartcontent -> f:format.raw()}
-        {content.main -> f:format.raw()}
+        <f:if condition="{quotecount} > 0">
+            <f:then>
+                {content.cartcontent -> f:format.raw()}
+                {content.main -> f:format.raw()}
+            </f:then>
+            <f:else>
+                {content.cartcontent -> f:format.raw()}
+                {content.bar -> f:format.raw()}
+            </f:else>
+        </f:if>
+
     </section>
     {parts.footer -> f:format.raw()}
 </f:section>
