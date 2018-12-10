@@ -20,6 +20,8 @@ prototype(Digidennis.MageMe:ProductPage.Document) < prototype(Neos.NodeTypes:Pag
         title = ${q(node).property('title')}
 
         content {
+            sitealert = Digidennis.SitePack:SiteAlert{
+            }
             main = PrimaryContent {
                 nodePath = 'main'
                 @if.gotcontent = ${node.context.inBackend || q(documentNode).children('main').children().count()> 0}

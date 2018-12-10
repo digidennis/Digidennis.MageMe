@@ -2,6 +2,7 @@
 <f:section name="body">
     {parts.menu -> f:format.raw()}
     <section class="content">
+        {content.sitealert -> f:format.raw()}
         {parts.breadcrumbs -> f:format.raw()}
         <div class="product-wrapper">
             <f:form action="add" controller="Cart" package="Digidennis.MageMe" name="add-cart" class="add-cart container" id="add-cart-form" data="{component:'Product', baseprice:baseprice, producttype:producttype}">

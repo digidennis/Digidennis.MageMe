@@ -23,6 +23,7 @@ prototype(Digidennis.MageMe:CartPage.Document) < prototype(Neos.NodeTypes:Page.D
         templatePath = 'resource://Digidennis.MageMe/Private/Templates/Page/CartPage.html'
         title = ${q(node).property('title')}
         content{
+            sitealert = Digidennis.SitePack:SiteAlert
             cartcontent = Neos.Fusion:Template{
                 quotecount = ${Math.trunc(String.toFloat(MageMe.CartHelper.getQuote().itemCount))}
                 cartlink = ${ Configuration.setting('Digidennis.MageMe.protocol') + '://' + Configuration.setting('Digidennis.MageMe.host') + '/checkout/onepage' }

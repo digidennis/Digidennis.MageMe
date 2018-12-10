@@ -2,6 +2,7 @@
 
 <f:section name="body">
     {parts.menu -> f:format.raw()}
+    {content.sitealert -> f:format.raw()}
     <section class="content">
         <f:if condition="{quotecount} > 0">
             <f:then>
